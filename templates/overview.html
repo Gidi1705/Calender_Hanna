@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Kalender Overzicht{% endblock %}
+
+{% block content %}
+    <div class="header">
+        <h1>Kalenderoverzicht voor {{ current_year }}</h1>
+    </div>
+
+    <!-- Maand Selectie -->
+    <div class="month-selector">
+        <form method="GET" action="{% url 'overview' %}">
+            <label for="month">Kies een maand:</label>
+            <select name="month" id="month" class="styled-select" onchange="this.form.submit()">
+                {% for month_num, month_name in maanden %}
+                    <option value="{{ month_num }}" {% if month_num == selected_month %}selected{% endif %}>
+                        {{ month_name }}
+                    </option>
+                {% endfor %}
+            </select>
+        </form>
+    </div>
+
+    <!-- Kalender -->
+    <!-- We set the grid rows to use 'auto' so that each row is only as tall as its content (the fixed 65px day boxes) -->
+    <div class="calendar" style="grid-template-rows: auto repeat({{ num_rows }}, auto);">
+        <div class="calendar-header">Ma</div>
+        <div class="calendar-header">Di</div>
+        <div class="calendar-header">Wo</div>
+        <div class="calendar-header">Do</div>
+        <div class="calendar-header">Vr</div>
+        <div class="calendar-header">Za</div>
+        <div class="calendar-header">Zo</div>
+
+        <!-- Lege dagen -->
+        {% for _ in empty_days %}
+            <div class="calendar-day empty"></div>
+        {% endfor %}
+
+        <!-- Dagen met herinneringen -->
+        {% for day in days %}
+            <a href="{% url 'get_day' day.date %}" class="calendar-day">
+                {{ day.date.day }}
+            </a>
+        {% endfor %}
+    </div>
+
+    <div class="navigation">
+        <a href="{% url 'index' %}" class="nav-button back-today">V</a>
+    </div>
+{% endblock %}

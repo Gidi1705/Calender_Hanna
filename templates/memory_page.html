@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    {% if is_today %}
+        Herinnering van vandaag
+    {% else %}
+        Herinnering van {{ formatted_date }}
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    <div class="memory-page">
+        <div class="header">
+            <h2>{{ formatted_date }}</h2>
+        </div>
+
+        <div class="image-container">
+            <img src="{% static 'images/'|add:day.image_filename %}" alt="Herinnering van {{ formatted_date }}">
+        </div>
+
+        <div class="text-box">
+            <p>{{ day.text }}</p>
+        </div>
+
+        <div class="navigation">
+            <a href="{% url 'overview' %}?month={{ day.date.month }}" class="nav-button back-overview">←</a>
+            {% if not is_today %}
+                <a href="{% url 'index' %}" class="nav-button back-today">V</a>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
