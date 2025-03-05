@@ -11,5 +11,52 @@
     <div class="container">
         {% block content %}{% endblock %}
     </div>
+
+    <script>
+        function setTheme(theme) {
+            let root = document.documentElement;
+
+            if (theme === 'default') {
+                root.style.setProperty('--background', 'linear-gradient(to bottom right, #eef4f8, #d9e7f1)');
+                root.style.setProperty('--container-bg', 'rgb(240, 240, 240)');
+                root.style.setProperty('--text-color', '#2c3e50');
+                root.style.setProperty('--primary-color', '#26547C');
+                root.style.setProperty('--button-bg', '#26547C');
+                root.style.setProperty('--button-hover', '#1e4466');
+            } else if (theme === 'dark') {
+                root.style.setProperty('--background', 'linear-gradient(to bottom right, #121212, #1E1E1E)');
+                root.style.setProperty('--container-bg', '#252525');
+                root.style.setProperty('--text-color', '#f1f1f1');
+                root.style.setProperty('--primary-color', '#555');
+                root.style.setProperty('--button-bg', '#444');
+                root.style.setProperty('--button-hover', '#666');
+            } else if (theme === 'pink') {
+                root.style.setProperty('--background', 'linear-gradient(to bottom right, #FFB6C1, #FF69B4)');
+                root.style.setProperty('--container-bg', '#FFC0CB');
+                root.style.setProperty('--text-color', '#5A0033');
+                root.style.setProperty('--primary-color', '#E91E63');
+                root.style.setProperty('--button-bg', '#E91E63');
+                root.style.setProperty('--button-hover', '#D81B60');
+            } else if (theme === 'green') {
+                root.style.setProperty('--background', 'linear-gradient(to bottom right, #A5D6A7, #66BB6A)');
+                root.style.setProperty('--container-bg', '#C8E6C9');
+                root.style.setProperty('--text-color', '#2E7D32');
+                root.style.setProperty('--primary-color', '#4CAF50');
+                root.style.setProperty('--button-bg', '#4CAF50');
+                root.style.setProperty('--button-hover', '#388E3C');
+            }
+
+            localStorage.setItem('selectedTheme', theme);
+        }
+
+        function loadTheme() {
+            let savedTheme = localStorage.getItem('selectedTheme');
+            if (savedTheme) {
+                setTheme(savedTheme);
+            }
+        }
+
+        window.onload = loadTheme;
+    </script>
 </body>
 </html>

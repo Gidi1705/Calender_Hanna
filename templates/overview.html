@@ -6,6 +6,8 @@
 {% block content %}
     <div class="header">
         <h1>Kalenderoverzicht voor {{ current_year }}</h1>
+
+
     </div>
 
     <!-- Maand Selectie -->
@@ -23,7 +25,6 @@
     </div>
 
     <!-- Kalender -->
-    <!-- We set the grid rows to use 'auto' so that each row is only as tall as its content (the fixed 65px day boxes) -->
     <div class="calendar" style="grid-template-rows: auto repeat({{ num_rows }}, auto);">
         <div class="calendar-header">Ma</div>
         <div class="calendar-header">Di</div>
@@ -33,12 +34,10 @@
         <div class="calendar-header">Za</div>
         <div class="calendar-header">Zo</div>
 
-        <!-- Lege dagen -->
         {% for _ in empty_days %}
             <div class="calendar-day empty"></div>
         {% endfor %}
 
-        <!-- Dagen met herinneringen -->
         {% for day in days %}
             <a href="{% url 'get_day' day.date %}" class="calendar-day">
                 {{ day.date.day }}

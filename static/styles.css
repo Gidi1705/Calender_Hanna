@@ -1,10 +1,20 @@
 /* General Styles */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap');
 
+/* CSS Variables for Theme Switching */
+:root {
+    --background: linear-gradient(to bottom right, #eef4f8, #d9e7f1);
+    --container-bg: rgb(240, 240, 240);
+    --text-color: #2c3e50;
+    --primary-color: #26547C;
+    --button-bg: #26547C;
+    --button-hover: #1e4466;
+}
+
 body {
     font-family: 'Inter', sans-serif;
-    background: linear-gradient(to bottom right, #eef4f8, #d9e7f1);
-    color: #2c3e50;
+    background: var(--background);
+    color: var(--text-color);
     text-align: center;
     margin: 0;
     padding: 0;
@@ -18,9 +28,9 @@ body {
 .container {
     width: 1024px;
     height: 600px;
-    background: rgb(240, 240, 240);
+    background: var(--container-bg);
     position: relative;
-    padding: 10px 20px 0px 20px; /* extra bottom padding for breathing room */
+    padding: 10px 20px;
     box-sizing: border-box;
     border-radius: 5px;
     box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.1);
@@ -28,9 +38,31 @@ body {
     flex-direction: column;
 }
 
+/* Theme Selector */
+.theme-selector {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+.theme-button {
+    padding: 8px 12px;
+    font-size: 14px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    margin: 5px;
+    transition: all 0.3s ease-in-out;
+}
+
+.theme-button:hover {
+    opacity: 0.8;
+}
+
 /* Header */
 .header h1, .header h2 {
-    color: #26547C;
+    color: var(--primary-color);
     font-size: 28px;
     font-weight: 600;
     text-align: center;
@@ -39,17 +71,21 @@ body {
 
 /* Text Box - Subtle & Modern */
 .text-box {
-    background: rgba(204, 226, 243, 0.3);
-    padding: 14px;
-    border-radius: 10px;
-    font-size: 16px;
-    line-height: 1.6;
-    margin: 10px auto 15px;
-    max-width: 80%;
-    max-height: 120px;
-    overflow-y: auto;
-    text-align: left;
+    width: 77%; /* Keep the width fixed */
+    min-height: auto; /* Allows height to adjust dynamically */
+    padding: 12px 20px; /* Keeps spacing inside the box */
+    background: rgba(204, 226, 243, 0.5);
+    border-radius: 12px;
+    text-align: center;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+    display: flex; /* Keep it centered and dynamic */
+    align-items: center; /* Centers text vertically */
+    justify-content: center; /* Centers text horizontally */
+    margin: 10px auto 5px; /* Keeps it centered */
 }
+
 
 /* Navigation Buttons - Clean & Interactive */
 .nav-button {
@@ -60,7 +96,7 @@ body {
     text-decoration: none;
     padding: 10px 18px;
     border-radius: 8px;
-    background: #26547C;
+    background: var(--button-bg);
     color: white;
     transition: all 0.3s ease-in-out;
     font-weight: 500;
@@ -68,7 +104,7 @@ body {
 }
 
 .nav-button:hover {
-    background: #1e4466;
+    background: var(--button-hover);
     box-shadow: 0px 5px 12px rgba(30, 68, 102, 0.3);
 }
 
@@ -94,8 +130,6 @@ body {
 .calendar {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    /* The inline style in overview.html sets the rows:
-       e.g., grid-template-rows: auto repeat({{ num_rows }}, auto); */
     gap: 6px;
     max-width: 750px;
     margin: 0 auto 20px auto;
@@ -103,18 +137,18 @@ body {
     justify-content: center;
 }
 
-/* Calendar Day Boxes - Now a bit smaller */
+/* Calendar Day Boxes */
 .calendar-day {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 68px;   /* reduced from 75px */
-    height: 58px;  /* reduced from 65px */
+    width: 68px;
+    height: 58px;
     background: white;
-    color: #26547C;
+    color: var(--primary-color);
     text-decoration: none;
     border-radius: 10px;
-    font-size: 17px; /* reduced from 18px */
+    font-size: 17px;
     font-weight: bold;
     margin: auto;
     box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.08);
@@ -122,7 +156,7 @@ body {
 }
 
 .calendar-day:hover {
-    background: #26547C;
+    background: var(--primary-color);
     color: white;
     transform: translateY(-3px);
     box-shadow: 0px 5px 12px rgba(38, 84, 124, 0.3);
@@ -134,7 +168,7 @@ body {
     font-weight: bold;
     text-align: center;
     padding-bottom: 8px;
-    border-bottom: 2px solid #26547C;
+    border-bottom: 2px solid var(--primary-color);
     width: 100%;
     margin-bottom: 8px;
 }
@@ -156,23 +190,23 @@ body {
     font-size: 15px;
     font-weight: bold;
     margin-right: 6px;
-    color: #26547C;
+    color: var(--primary-color);
 }
 
 .styled-select {
     padding: 8px;
     font-size: 15px;
     border-radius: 8px;
-    border: 2px solid #26547C;
+    border: 2px solid var(--primary-color);
     background-color: white;
-    color: #2c3e50;
+    color: var(--text-color);
     font-family: inherit;
     cursor: pointer;
     transition: all 0.2s ease-in-out;
 }
 
 .styled-select:hover {
-    border-color: #1e4466;
+    border-color: var(--button-hover);
     background-color: #eef4f8;
 }
 
@@ -183,7 +217,7 @@ body {
     font-size: 15px;
     font-weight: bold;
     color: white;
-    background-color: #26547C;
+    background-color: var(--button-bg);
     border-radius: 8px;
     text-decoration: none;
     transition: background-color 0.3s ease-in-out;
@@ -191,7 +225,7 @@ body {
 }
 
 .button:hover {
-    background-color: #1e4466;
+    background-color: var(--button-hover);
     box-shadow: 0px 5px 12px rgba(30, 68, 102, 0.3);
 }
 
@@ -199,46 +233,32 @@ body {
 .memory-page {
     display: flex;
     flex-direction: column;
-    height: 100%; /* Fills the 600px container */
+    height: 100%;
 }
 
 /* Header takes minimal space */
 .memory-page .header {
     flex: 0 0 auto;
+    font-size: 32px;
     text-align: center;
     padding: 4px 0;
+    margin-top: 8px;
 }
+
 .memory-page .header h2 {
     font-size: 24px;
     margin: 0;
 }
 
-/* Navigation takes minimal space */
-.memory-page .navigation {
-    flex: 0 0 auto;
-    text-align: center;
-    padding: 4px 0;
-}
-
-/* Text box is fixed to a small height */
-.memory-page .text-box {
-    flex: 0 0 40px;  /* Fixed height for the text box */
-    margin-top: 5px;
-    padding: 4px 4px;
-    font-size: 12px;
-    line-height: 1.2;
-    overflow-y: auto;
-    max-height: 40px; /* Ensure it never grows larger */
-}
-
 /* Image container takes up all remaining space */
 .memory-page .image-container {
-    flex: 1 1 auto;  /* Use all remaining space */
+    flex: 1 1 auto;
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
     max-height: 100%;
+    margin-top: 10px;
 }
 
 .memory-page .image-container img {
