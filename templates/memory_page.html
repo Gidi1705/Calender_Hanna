@@ -12,7 +12,11 @@
 {% block content %}
     <div class="memory-page">
         <div class="header">
-            <h2>{{ formatted_date }}</h2>
+            {% if is_today %}
+                <h2>{{ formatted_date }}</h2>
+            {% else %}
+                <h2>Herinnering van {{ formatted_date }}</h2>
+            {% endif %}
         </div>
 
         <div class="image-container">
